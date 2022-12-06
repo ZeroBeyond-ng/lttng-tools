@@ -354,6 +354,7 @@ enum lttng_event_context_type {
 
 %rename("create") lttng_create_session(const char *name, const char *path);
 %rename("create_snapshot") lttng_create_session_snapshot(const char *name, const char *snapshot_url);
+%rename("create_live") lttng_create_session_live(const char *name, const char * url, unsigned int timer_interval);
 %rename("destroy") lttng_destroy_session(const char *name);
 %rename("_lttng_create_handle") lttng_create_handle(const char *session_name, struct lttng_domain *domain);
 %rename("_lttng_destroy_handle") lttng_destroy_handle(struct lttng_handle *handle);
@@ -408,6 +409,13 @@ Create a new recording session using name and snapshot_url in snapshot
 mode (flight recorder).
 Returns 0 on success or a negative error code."
 int lttng_create_session_snapshot(const char *name, const char *path);
+
+%feature("docstring")"create_live(str name, str snapshot_url) -> int
+
+Create a live recording session using name and url in live 
+mode with time intervals specified with frequency specified by timer_interval.
+Returns 0 on success or a negative error code."
+int lttng_create_session_live(const char *name, const char * url, unsigned int timer_interval);
 
 %feature("docstring")"destroy(str name) -> int
 
